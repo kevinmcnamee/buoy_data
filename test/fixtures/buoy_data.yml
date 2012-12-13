@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  buoy_id: 1
+  wave_height: 1.5
+  swell_period: 1.5
+  swell_direction: 1
+  water_temp: 1.5
+  wind_direction: 1
+
+two:
+  buoy_id: 1
+  wave_height: 1.5
+  swell_period: 1.5
+  swell_direction: 1
+  water_temp: 1.5
+  wind_direction: 1

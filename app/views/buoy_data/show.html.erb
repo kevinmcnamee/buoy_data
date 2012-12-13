@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Buoy:</b>
+  <%= @buoy_datum.buoy_id %>
+</p>
+
+<p>
+  <b>Wave height:</b>
+  <%= @buoy_datum.wave_height %>
+</p>
+
+<p>
+  <b>Swell period:</b>
+  <%= @buoy_datum.swell_period %>
+</p>
+
+<p>
+  <b>Swell direction:</b>
+  <%= @buoy_datum.swell_direction %>
+</p>
+
+<p>
+  <b>Water temp:</b>
+  <%= @buoy_datum.water_temp %>
+</p>
+
+<p>
+  <b>Wind direction:</b>
+  <%= @buoy_datum.wind_direction %>
+</p>
+
+
+<%= link_to 'Edit', edit_buoy_datum_path(@buoy_datum) %> |
+<%= link_to 'Back', buoy_data_path %>

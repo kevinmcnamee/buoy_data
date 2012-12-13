@@ -1,0 +1,41 @@
+<%= form_for(@buoy_datum) do |f| %>
+  <% if @buoy_datum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@buoy_datum.errors.count, "error") %> prohibited this buoy_datum from being saved:</h2>
+
+      <ul>
+      <% @buoy_datum.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :buoy_id %><br />
+    <%= f.number_field :buoy_id %>
+  </div>
+  <div class="field">
+    <%= f.label :wave_height %><br />
+    <%= f.text_field :wave_height %>
+  </div>
+  <div class="field">
+    <%= f.label :swell_period %><br />
+    <%= f.text_field :swell_period %>
+  </div>
+  <div class="field">
+    <%= f.label :swell_direction %><br />
+    <%= f.number_field :swell_direction %>
+  </div>
+  <div class="field">
+    <%= f.label :water_temp %><br />
+    <%= f.text_field :water_temp %>
+  </div>
+  <div class="field">
+    <%= f.label :wind_direction %><br />
+    <%= f.number_field :wind_direction %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

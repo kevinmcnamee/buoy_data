@@ -1,0 +1,33 @@
+<h1>Listing buoy_data</h1>
+
+<table>
+  <tr>
+    <th>Buoy</th>
+    <th>Wave height</th>
+    <th>Swell period</th>
+    <th>Swell direction</th>
+    <th>Water temp</th>
+    <th>Wind direction</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @buoy_data.each do |buoy_datum| %>
+  <tr>
+    <td><%= buoy_datum.buoy_id %></td>
+    <td><%= buoy_datum.wave_height %></td>
+    <td><%= buoy_datum.swell_period %></td>
+    <td><%= buoy_datum.swell_direction %></td>
+    <td><%= buoy_datum.water_temp %></td>
+    <td><%= buoy_datum.wind_direction %></td>
+    <td><%= link_to 'Show', buoy_datum %></td>
+    <td><%= link_to 'Edit', edit_buoy_datum_path(buoy_datum) %></td>
+    <td><%= link_to 'Destroy', buoy_datum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Buoy datum', new_buoy_datum_path %>
