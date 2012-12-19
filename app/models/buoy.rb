@@ -2,7 +2,10 @@ class Buoy < ActiveRecord::Base
   require 'nokogiri'
   require 'open-uri'
 
-  attr_accessible :coordinates, :name, :buoy_type, :url
+  attr_accessible :coordinates, :name, :buoy_type, :url, :latitude, :longitude
+
+  # geocoded_by :full_street_address
+  # after_validation :geocode
 
   @@regions = []
 
@@ -10,15 +13,23 @@ class Buoy < ActiveRecord::Base
     links_list << link
   end
 
-  def get_coordinates(coordinates_list, coordinates)
-    coordinates_list << coordinates
-  end
+  #I want to refactor to move parsing logic into BuoyParse model
+  # def self.new_from_parser(raw_data)
+  #   @buoy_lat =BuoyParser.new(raw_data)
+  #   self.new.tap do |b|
+  #     b.lat = @buoy_parser.lat
+  #   end
+  # end
 
-
-  #this needs work to make sure we are getting the correct coordinates
   def self.coordinates(url, link) 
     page = Nokogiri::HTML(open("#{url}#{link}"))
     coords = page.css("td p b").select { |link| link.text.match(/" W\)/)}
+    coord_text = coords.first.text
+    coordinates = coord_text.split("(").first
+    lat_long = coordinates.split("N")
+    longitude = lat_long[1].split("W")
+    latitude = lat_long[0]
+    latitude_longitude = [latitude.to_f, longitude[0].to_f]
   end
 
   def self.build_regions(url)
@@ -26,10 +37,14 @@ class Buoy < ActiveRecord::Base
       region_maps = Nokogiri::HTML(open("#{url}#{region}"))
       region_maps.css("map area").map do |link|
         if link["alt"].match(/\A4/)
+          lat_long = coordinates(url,link["href"])
           create!(
-            :coordinates => Buoy.coordinates(url,link["href"]),
+            # :coordinates => coordinates(url,link["href"]),
             :name => link["alt"],
-            :url => "#{url}#{link["href"]}")
+            :url => "#{url}#{link["href"]}",
+            :latitude => lat_long.first,
+            :longitude => lat_long.last*(-1)
+            )
         end
       end
     end

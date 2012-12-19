@@ -40,3 +40,5 @@ gem 'debugger'
 gem 'nokogiri'
 
 gem 'geocoder'
+
+gem 'pg'

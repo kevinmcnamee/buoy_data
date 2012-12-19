@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208211108) do
+ActiveRecord::Schema.define(:version => 20121213204300) do
 
   create_table "buoy_data", :force => true do |t|
     t.integer  "buoy_id"
@@ -27,11 +27,12 @@ ActiveRecord::Schema.define(:version => 20121208211108) do
 
   create_table "buoys", :force => true do |t|
     t.string   "name"
-    t.string   "coordinates"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "buoy_type"
     t.string   "url"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
 end
