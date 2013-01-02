@@ -40,3 +40,5 @@ gem 'nokogiri'
 gem 'geocoder'
 
 gem 'pg'
+
+gem 'gmaps4rails'

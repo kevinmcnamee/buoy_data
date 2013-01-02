@@ -3,6 +3,7 @@ class BuoysController < ApplicationController
   # GET /buoys.json
   def index
     @buoys = Buoy.all
+    @json = @buoys.to_gmaps4rails
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +15,7 @@ class BuoysController < ApplicationController
   # GET /buoys/1.json
   def show
     @buoy = Buoy.find(params[:id])
-
+    @json = @buoy.to_gmaps4rails
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @buoy }

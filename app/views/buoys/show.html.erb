@@ -5,11 +5,8 @@
   <%= @buoy.name %>
 </p>
 
-<p>
-  <b>Coordinates:</b>
-  <%= @buoy.coordinates %>
-</p>
 
+  <%= gmaps4rails(@json) %>
 
 <%= link_to 'Edit', edit_buoy_path(@buoy) %> |
 <%= link_to 'Back', buoys_path %>

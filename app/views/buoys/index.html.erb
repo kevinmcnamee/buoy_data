@@ -1,25 +1,6 @@
 <h1>Listing buoys</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Coordinates</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @buoys.each do |buoy| %>
-  <tr>
-    <td><%= buoy.name %></td>
-    <td><%= buoy.coordinates %></td>
-    <td><%= link_to 'Show', buoy %></td>
-    <td><%= link_to 'Edit', edit_buoy_path(buoy) %></td>
-    <td><%= link_to 'Destroy', buoy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<%= gmaps4rails(@json) %>
 
 <br />
 
-<%= link_to 'New Buoy', new_buoy_path %>

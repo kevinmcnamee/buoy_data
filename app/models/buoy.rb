@@ -3,9 +3,19 @@ class Buoy < ActiveRecord::Base
   require 'open-uri'
 
   attr_accessible :coordinates, :name, :buoy_type, :url, :latitude, :longitude
+  acts_as_gmappable
 
   # geocoded_by :full_street_address
   # after_validation :geocode
+
+  def gmaps4rails_address
+    "#{self.latitude}, #{self.longitude}"
+  end
+
+  def gmaps4rails_infowindow
+    "<strong>Buoy #{self.name}</strong></br>
+    <a href=\"http://www.ndbc.noaa.gov/station_page.php?station=#{self.name}\" target=\"blank\">Visit on nbdc</a>"
+  end
 
   @@regions = []
 

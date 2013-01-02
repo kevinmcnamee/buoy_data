@@ -3,6 +3,8 @@ BuoyDataRails::Application.routes.draw do
 
   resources :buoys
 
+  root :to => 'buoys#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

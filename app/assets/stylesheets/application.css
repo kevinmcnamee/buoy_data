@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+  background: url(gray_jean.png) repeat ;
+}
