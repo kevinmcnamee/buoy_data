@@ -6,6 +6,14 @@ class BuoyDatum < ActiveRecord::Base
 
   @@years = []
 
+  def self.create_from_nbdc
+    index_url = "http://www.ndbc.noaa.gov"
+    buoys = Buoy.all
+    grab_year_info(buoys)
+  end
+
+  private
+
   def self.add_links(links_list, link)
     links_list << link
   end
@@ -39,7 +47,7 @@ class BuoyDatum < ActiveRecord::Base
             :date => history_info.last,
             :buoy_id => buoy_id,
             :swell_direction => history_info[11],
-            :wave_height =>  BuoyDatum.to_feet(history_info[8]),
+            :wave_height =>  BuoyDatum.to_feet(history_info[8]).round(1),
             :swell_period => history_info[10],
             :water_temp => BuoyDatum.to_farenheit(history_info[14]))
         end
@@ -60,12 +68,4 @@ class BuoyDatum < ActiveRecord::Base
       end
     end
   end
-
-  def self.create_from_nbdc
-    index_url = "http://www.ndbc.noaa.gov"
-    buoys = Buoy.all
-    grab_year_info(buoys)
-  end
-
-
 end

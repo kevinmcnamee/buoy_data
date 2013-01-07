@@ -21,6 +21,30 @@ class Buoy < ActiveRecord::Base
 
   @@regions = []
 
+
+  def self.create_from_nbdc
+    index_url = "http://www.ndbc.noaa.gov"
+    @@regions =["/maps/southeast_hist.shtml", "/maps/northeast_hist.shtml", "/maps/florida_hist.shtml" ]
+    buoy_pages = []
+    @@regions.each do |region|
+      region_maps = Nokogiri::HTML(open("#{index_url}#{region}"))
+      region_maps.css("map area").map do |link| 
+        if link["href"].match(/\A\/maps/)
+          add_links(@@regions, link["href"])
+        elsif link["href"].match(/[^\.]+[shtml]\z/)
+          add_links(@@regions, "/maps/#{link["href"]}")
+        end
+        if link["alt"].match(/\A4/)
+          add_links(buoy_pages, link["href"])
+        end
+      end
+    end
+    build_regions(index_url)
+  end
+
+  
+
+  private
   def self.add_links(links_list, link)
     links_list << link
   end
@@ -60,27 +84,7 @@ class Buoy < ActiveRecord::Base
         end
       end
     end
-  end
-
-  def self.create_from_nbdc
-    index_url = "http://www.ndbc.noaa.gov"
-    @@regions =["/maps/southeast_hist.shtml", "/maps/northeast_hist.shtml", "/maps/florida_hist.shtml" ]
-    buoy_pages = []
-    @@regions.each do |region|
-      region_maps = Nokogiri::HTML(open("#{index_url}#{region}"))
-      region_maps.css("map area").map do |link| 
-        if link["href"].match(/\A\/maps/)
-          add_links(@@regions, link["href"])
-        elsif link["href"].match(/[^\.]+[shtml]\z/)
-          add_links(@@regions, "/maps/#{link["href"]}")
-        end
-        if link["alt"].match(/\A4/)
-          add_links(buoy_pages, link["href"])
-        end
-      end
-    end
-    build_regions(index_url)
-  end
+  end  
 
 end
 

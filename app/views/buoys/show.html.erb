@@ -5,17 +5,36 @@
   <%= @buoy.name %>
 </p>
 
+<%= gmaps4rails(@json) %>
 
-  <%= gmaps4rails(@json) %>
-<ul class='data-table'>
-  <% @buoy_data.each do |buoy_data| %>
-    <li>Date: <%= buoy_data.date %></li>
-    <li>Height: <%= buoy_data.wave_height %></li>
-    <li>Swell Period <%= buoy_data.swell_period %>
-  <% end %>
-</ul>
-
-<%= will_paginate @buoy_data %>
+<div class ='row'>
+  <div class='span6'>
+    <ul class='data-table'>
+      <li class='span4'>Date</li>
+      <li class='span4'>Swell Height</li>
+      <li class='span4'>Swell Period</li>
+      <% @buoy_data.each do |buoy_data| %>
+      <div class='row'>
+        <li class='span4'><%= buoy_data.date %></li>
+        <li class='span4'><%= buoy_data.wave_height.round(1) %> ft.</li>
+        <li class='span4'><%= buoy_data.swell_period %> sec</li>
+      </div>
+      <% end %>
+    <div class='pagination'>
+      <%= will_paginate @buoy_data %>
+    </div>
+    </div>
+    <div class='span6'>
+      <ul class='data-table'>
+       <% @buoy_data.each do |buoy_data| %>
+          <li>Date: <%= buoy_data.date %></li>
+          <li>Height: <%= buoy_data.wave_height %></li>
+          <li>Swell Period <%= buoy_data.swell_period %>
+        <% end %>
+      </ul>
+    </di>
+  </ul>
+</div>
 
 <%= link_to 'Edit', edit_buoy_path(@buoy) %> |
 <%= link_to 'Back', buoys_path %>
