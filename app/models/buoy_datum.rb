@@ -1,5 +1,8 @@
 class BuoyDatum < ActiveRecord::Base
   attr_accessible :date, :buoy_id, :swell_direction, :swell_period, :water_temp, :wave_height, :wind_direction
+  belongs_to :buoy
+
+  self.per_page = 10
 
   @@years = []
 

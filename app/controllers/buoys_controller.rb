@@ -15,6 +15,7 @@ class BuoysController < ApplicationController
   # GET /buoys/1.json
   def show
     @buoy = Buoy.find(params[:id])
+    @buoy_data = @buoy.buoy_datum.paginate(:page => params[:page], :per_page => 10)
     @json = @buoy.to_gmaps4rails
     respond_to do |format|
       format.html # show.html.erb

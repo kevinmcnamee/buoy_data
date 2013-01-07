@@ -44,3 +44,5 @@ gem 'pg'
 gem 'gmaps4rails'
 
 gem 'taps'
+
+gem 'will_paginate'

@@ -5,6 +5,8 @@ class Buoy < ActiveRecord::Base
   attr_accessible :coordinates, :name, :buoy_type, :url, :latitude, :longitude
   acts_as_gmappable
 
+  has_many :buoy_datum
+
   # geocoded_by :full_street_address
   # after_validation :geocode
 

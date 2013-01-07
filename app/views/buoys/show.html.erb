@@ -7,6 +7,15 @@
 
 
   <%= gmaps4rails(@json) %>
+<ul class='data-table'>
+  <% @buoy_data.each do |buoy_data| %>
+    <li>Date: <%= buoy_data.date %></li>
+    <li>Height: <%= buoy_data.wave_height %></li>
+    <li>Swell Period <%= buoy_data.swell_period %>
+  <% end %>
+</ul>
+
+<%= will_paginate @buoy_data %>
 
 <%= link_to 'Edit', edit_buoy_path(@buoy) %> |
 <%= link_to 'Back', buoys_path %>
