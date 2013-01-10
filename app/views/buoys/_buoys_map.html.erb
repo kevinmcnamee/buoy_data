@@ -1,0 +1,22 @@
+<script>
+
+$(function() {
+  $('#my_map').gmap3({
+    map:{
+      options:{
+        zoom:10,
+        center:[<%= @buoy.latitude %>, <%= @buoy.longitude %>] 
+      }
+    },
+    marker:{
+      values: [
+        {latLng:[<%= @buoy.latitude %>, <%= @buoy.longitude %>] }
+      ]
+    }
+  });
+});
+
+</script>
+
+
+<div id='my_map'class='gmaps3'></div>

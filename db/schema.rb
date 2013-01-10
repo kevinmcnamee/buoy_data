@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213204300) do
+ActiveRecord::Schema.define(:version => 20130109193242) do
 
   create_table "buoy_data", :force => true do |t|
     t.integer  "buoy_id"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(:version => 20121213204300) do
     t.integer  "wind_direction"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "date"
+    t.string   "time"
+    t.integer  "quality"
+    t.datetime "date"
   end
 
   create_table "buoys", :force => true do |t|

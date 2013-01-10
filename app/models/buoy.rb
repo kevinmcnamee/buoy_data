@@ -41,9 +41,7 @@ class Buoy < ActiveRecord::Base
     end
     build_regions(index_url)
   end
-
   
-
   private
   def self.add_links(links_list, link)
     links_list << link
